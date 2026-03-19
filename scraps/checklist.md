@@ -95,7 +95,6 @@ NODE_ENV=production  # ← 設定されているか確認
 - [ ] `polyfills.ts` 等の polyfill ファイルを**完全削除** (Chrome 最新版対応なら不要)
 - [ ] `LimitChunkCountPlugin` があれば削除 (チャンク分割を妨げる)
 - [ ] inline source map があれば削除
-- [ ] `pnpm up` で依存関係をアップデートする (古いバージョンに意図的なバグが仕込まれていることがある)
 - [ ] Dockerfile がある場合、マルチステージビルドに最適化する
 
 ```dockerfile
@@ -419,13 +418,6 @@ reply.header('Cache-Control', 'private, no-store');
 // デフォルトで no-store が設定されていれば削除する (2025 年に仕込まれていた)
 ```
 
-**Cache-Control の落とし穴 (nissy 氏の知見)**:
-- `no-store`: キャッシュを完全に禁止 (最も強力)
-- `no-cache`: キャッシュするが毎回再検証 (`no-store` とは別物！)
-- `max-age=0`: キャッシュを無効化しない → 無効化には `must-revalidate` が必要
-- `immutable`: リロード時に再検証しない (ハッシュ付きファイルに最適)
-- `stale-while-revalidate`: 古いコンテンツを返しながらバックグラウンドで更新
-
 - [ ] DB インデックスを追加 (テーブルのリレーションを確認)
 - [ ] N+1 クエリを一括クエリに変換
 - [ ] API レスポンスの不要なフィールドを削除
@@ -444,6 +436,13 @@ reply.header('Cache-Control', 'private, no-store');
 ```
 DevTools > Network > No throttling → Slow 4G に変更して全ページを確認
 ```
+
+**Cache-Control の落とし穴 (nissy 氏の知見)**:
+- `no-store`: キャッシュを完全に禁止 (最も強力)
+- `no-cache`: キャッシュするが毎回再検証 (`no-store` とは別物！)
+- `max-age=0`: キャッシュを無効化しない → 無効化には `must-revalidate` が必要
+- `immutable`: リロード時に再検証しない (ハッシュ付きファイルに最適)
+- `stale-while-revalidate`: 古いコンテンツを返しながらバックグラウンドで更新
 
 ---
 
@@ -586,5 +585,5 @@ return <div ref={ref}>{visible && <HeavyComponent />}</div>;
 | `<AspectRatio>` コンポーネント | `aspect-ratio` |
 
 
-> スコア改善量の実績一覧は [guide.md](./guide.md) を参照。
+> スコア改善量の実績一覧は [README.md](./README.md) を参照。
 > 失格・罠パターン一覧は [traps.md](./traps.md) を参照。
