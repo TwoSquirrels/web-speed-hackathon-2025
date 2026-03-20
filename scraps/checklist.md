@@ -19,9 +19,11 @@
 - [ ] ReDoS 脆弱性のある正規表現を grep で検索する (ログイン・バリデーションに毎年仕込まれる)
 - [ ] `POST /api/initialize` が正常に動くか確認する (採点前に DB リセットされる)
 
-### ⚠️ 初手は Lighthouse が使えない
-
-初期状態ではページ表示に 5 分以上かかる場合があり、Lighthouse は**真っ白な画面を完成状態として誤認**する (TBT 0ms などの虚偽スコアが出る)。この段階の Lighthouse スコアは全く信頼できない。
+> [!WARNING]
+>
+> **初手は Lighthouse が使えない**
+>
+> 初期状態ではページ表示に 5 分以上かかる場合があり、Lighthouse は**真っ白な画面を完成状態として誤認**する (TBT 0ms などの虚偽スコアが出る)。この段階の Lighthouse スコアは全く信頼できない。
 
 **初手で使える計測手法 (Lighthouse の代わり)**:
 
@@ -119,7 +121,9 @@ CMD ["node", "dist/index.js"]
 
 webpack 以外のバンドラーでも、Vite への移行はチャンク分割・動的 import が格段に楽になるため効果が大きい。Claude Code 等の AI に任せれば機械的に移行できる場合が多い。**ダメだったら即 revert** という前提で試みる。
 
-**タイムボックス: 1 時間。超えたら revert して次の Phase へ進む。**
+> [!IMPORTANT]
+>
+> タイムボックス: 1 時間。超えたら revert して次の Phase へ進む。
 
 ```
 優先順位: Vite > Rspack (webpack 互換で設定変更が最小) > webpack そのまま
@@ -192,7 +196,9 @@ export default defineConfig({
 <script src="/main.js" defer></script>
 ```
 
-**注意**: 動的クラス名 (テンプレートリテラル) は静的抽出されない。`style` props または `safelist` で対応。
+> [!WARNING]
+>
+> 動的クラス名 (テンプレートリテラル) は静的抽出されない。`style` props または `safelist` で対応。
 
 - [ ] bundle analyzer でサイズ順に上位ライブラリを確認
 - [ ] `moment` → `day.js` に置換
@@ -460,7 +466,7 @@ DevTools > Network > No throttling → Slow 4G に変更して全ページを確
 ```
 Cloudflare Pages (フロント) ← brotli自動 + CDN
          ↓ fetch with credentials
-Fly.io / Koyeb (バックエンド API)
+Fly.io / Koyeb / Railway (バックエンド API)
 ```
 
 クロスオリジン構成の場合は以下が必要:
@@ -554,6 +560,8 @@ return <div ref={ref}>{visible && <HeavyComponent />}</div>;
 
 ## Phase 8: 最終確認 (絶対に省略しない)
 
+> [!IMPORTANT]
+>
 > **競技終了 30 分前**には最適化をやめてここに専念する。
 
 - [ ] VRT を実行して差分がゼロか確認 (差分があれば revert する)

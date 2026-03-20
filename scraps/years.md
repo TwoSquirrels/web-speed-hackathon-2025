@@ -439,9 +439,13 @@ const LoadableTop = loadable(() => import("./pages/Top"), {
 | 利用規約を遅延読み込み (最終手) | スコア押し上げ |
 | SSR + データ事前取得 | CLS 大幅削減 |
 
-**注意**: JXL 形式は ImageMagick での AVIF 変換に失敗する場合がある → `sharp` npm パッケージを使う
+> [!WARNING]
+>
+> JXL 形式は ImageMagick での AVIF 変換に失敗する場合がある → `sharp` npm パッケージを使う
 
-**初回デプロイに注意**: Docker Build などで 45 分かかる場合あり。序盤の時間管理に注意。
+> [!WARNING]
+>
+> 初回デプロイに注意: Docker Build などで 45 分かかる場合あり。序盤の時間管理に注意。
 
 ### 作品情報編集・管理画面
 - 上位 2 名とも 0.75 / 50 点以下 (共通の難所、手が回らない)
@@ -569,7 +573,7 @@ const LoadableTop = loadable(() => import("./pages/Top"), {
 | 年度 | テーマ | 技術 | 満点 | 初期点 | バンドル初期 |
 |------|--------|------|------|--------|-------------|
 | 2020 | ブログ | JS/CSS/Webpack | ~575 | 0 | 15.6MB |
-| 2021 mini | SNS | JS/CSS | 720 | 3〜5 | — |
+| 2021 mini | SNS | JS/CSS | 720 | 3〜5 | 12.2MB |
 | 2022 | ベッティング | JS/Webpack | 500 | 6 | — |
 | 2023 | ショッピング | TS/Vite/pnpm | 不明 | — | — |
 | 2024 | 漫画 | TS/pnpm | 700 | 27.75 | 119.89MB |
